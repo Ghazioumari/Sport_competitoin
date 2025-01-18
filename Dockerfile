@@ -1,13 +1,14 @@
-# You can change this base image to anything else
-# But make sure to use the correct version of Java
-FROM adoptopenjdk/openjdk11:alpine-jre
+# Utilisation de l'image de base Java 17
+FROM openjdk:17-jdk-slim
 
-# Simply the artifact path
-ARG artifact=target/spring-boot-web.jar
+# Définition du répertoire de travail
+WORKDIR /app
 
-WORKDIR /opt/app
+# Copie du fichier JAR de l'application
+COPY target/*.jar app.jar
 
-COPY ${artifact} app.jar
+# Port exposé par l'application
+EXPOSE 8082
 
-# This should not be changed
-ENTRYPOINT ["java","-jar","app.jar"]
+# Commande pour démarrer l'application
+ENTRYPOINT ["java", "-jar", "app.jar"]
