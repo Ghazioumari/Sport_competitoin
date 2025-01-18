@@ -1,14 +1,12 @@
-# Utilisation de l'image de base Java 17
-FROM openjdk:17-jdk-slim
 
-# Définition du répertoire de travail
-WORKDIR /app
+FROM adoptopenjdk/openjdk17:alpine-jre
 
-# Copie du fichier JAR de l'application
-COPY target/*.jar app.jar
+# Simply the artifact path
+ARG artifact=target/spring-boot-web.jar
 
-# Port exposé par l'application
-EXPOSE 8082
+WORKDIR /opt/app
 
-# Commande pour démarrer l'application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+COPY ${artifact} app.jar
+
+# This should not be changed
+ENTRYPOINT ["java","-jar","app.jar"]
