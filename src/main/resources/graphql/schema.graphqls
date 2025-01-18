@@ -1,0 +1,31 @@
+type Competition {
+    id: ID!
+    name: String
+    country: String
+    year: Int
+    winner: String
+    runnerup: String
+}
+
+type Match {
+    id: ID!
+    competition: String
+    year: Int
+    round: String
+    team1: String
+    team2: String
+    team1Goals: Int
+    team2Goals: Int
+}
+
+type Query {
+    competitions: [Competition]
+    competition(id: ID!): Competition
+    matches: [Match]
+    match(id: ID!): Match
+}
+
+type Mutation {
+    createCompetition(name: String!, country: String!, year: Int!, winner: String!, runnerup: String!): Competition
+    createMatch(competition: String!, year: Int!, round: String!, team1: String!, team2: String!, team1Goals: Int!, team2Goals: Int!): Match
+}
